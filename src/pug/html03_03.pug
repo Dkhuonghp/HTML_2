@@ -1,0 +1,32 @@
+doctype html
+html(lang="ja")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title HTML3-03-Sassでスタイル作成
+        link(rel="stylesheet", href="css/html03_03.css")
+    body
+        #wrapper
+            header 
+                h1 TEMPファイルを分解し、pugファイルに変更する
+            section.change
+                h2.ttl step1 head foot への分解
+                p
+                    br
+                    |temp.htmlをそれぞれ、ヘッダー部分・フッター部分に分解し、 共通部分と変更される部分の箇所にファイルを分けます。HTMLのタグの記述方法を直接pugには出来ないので、pugファイルの記載方法にならい pugファイルに合わせた記載方法に変更しましょう。
+            section 
+                h2.ttl step2 pugファイルの読み込み
+                p 
+                    |ヘッダー部分・メイン部分・フッター部分とファイルを分ける事が出来たら メインとなるファイルに各ファイルを読み込みます。
+                    br
+                    |メインファイルからincludeを使用してヘッダー・フッターを読み込みファイルを完成させてください。
+            section
+                h2.ttl step3 ファイルの確認
+                p
+                    |ファイルを作成することが出来たら、実際に書き出されたhtmlファイルを確認し、期待通りのコードになっているか確認しましょう。
+                    br
+                    |構造が間違った場合、HTMLファイルの構成も誤りのあるコードになります。
+                    br
+                    |pugファイルはsass（今後学習する内容）と違い、普段書くHTMLとは異なる為、慣れが必要です。
+            include _html03_01_foot

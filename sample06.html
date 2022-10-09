@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="css/ress.css" rel="stylesheet">
+  <link href="css/sample05_style.css" rel="stylesheet">
+  <link href="css/sample06.css" rel="stylesheet">
+  <link href="js/prettify.css" rel="stylesheet">
+  <title>Sassの基礎　練習ファイル01</title>
+</head>
+<body>
+<header>
+<h1 class="icon icon-iconSet contentTitle">
+Sassファイルの練習ファイル02</h1>
+</header>
+
+<div class="topicWrap">
+<section>
+<h2 class="topicTitle">その6 演算</h2>
+<p>
+Sass内では、演算をすることが可能で、widthの値からpadding/marginの値を引くなどの指定が必要です。
+そういった面倒な計算作業もSass内で演算を使って作業することが可能です。
+</p>
+
+<div class="sampleCode">
+<h3>Sample Code - 演算例</h3>
+<pre class="prettyprint linenums">
+<code>.boxWrap{
+    width: 600px - 16px;
+    padding: 0 8px
+}
+.sampleWrap{
+    border: solid 1px #333;
+    width: 200px * 3 - 20pt;
+    padding: 0 10px;
+    .box{
+        border: dotted 1px tomato;
+        width: calc(100% - 10px);
+        padding: 5px;
+        margin: 10px;
+    }
+}
+</code></pre>
+<p class="note">
+計算が可能であれば、単位の違う値同士の計算も可能。<br>
+%とpxの計算はエラーになる為、CSSプロパティのcalc関数を使用すれば計算をすることができる。
+</p>
+
+
+<div class="practiceWrap">
+<h2>表示結果</h2>
+    <div class="sampleWrap">
+        <div class="box">box 1</div>
+        <div class="box">box 2</div>
+        <div class="box">box 3</div>
+    </div>
+</div>
+
+</div>
+
+<h3 class="icon icon-iconSet practice">【練習】プロパティの演算</h3>
+<p>
+class名practice06内に変数 $main_title_width を作成し、300pxを指定する。<br>
+class名titleWrapに3倍の値の横幅を設定してみましょう。<br>
+各section要素titleBoxクラスの幅には300px($_main_title_width)を設定し確認しましょう。<br>
+</p>
+<p>
+横幅の指定だけでは、確認する際に範囲が分からない為、要素にボーダーを引いて目で見て確認すること。<br>
+今回は、ress.cssファイル内でpadding/margin/borderの値を込みで計算している為、要素検証を使い、各要素サイズを見て確認してみること。<br>
+box-sizingプロパティ<br>
+要素の計算基準をどこにするか設定する。border-boxは、要素のボーダーを基準にボックスサイズを計算する。
+</p>
+
+<!-- 練習コード -->
+<div class="practiceWrap practice06">
+    <div class="titleWrap">
+        <section class="titleBox">
+            <h2>サンプルタイトル</h2>
+            <p>テキストテキストテキスト</p>
+        </section>
+        <section class="titleBox">
+            <h2>サンプルタイトル</h2>
+            <p>テキストテキストテキスト</p>
+        </section>
+        <section class="titleBox">
+            <h2>サンプルタイトル</h2>
+            <p>テキストテキストテキスト</p>
+        </section>
+        
+    </div>
+</div>
+
+<h3>Sample Code - 演算例2 色計算おまけ</h3>
+<p>色関係だと、こういった便利な機能もあります。</p>
+<pre class="prettyprint linenums">
+<code>$changeColor: #f00;
+.change{
+    //色相の変更
+    color: adjust-hue($changeColor, 60deg);
+
+    //彩度の変更
+    //彩度を10%上げる
+    color: saturate($changeColor, 10%);
+    //彩度を10%下げる
+    color: desaturate($changeColor, 10%);
+
+    //明るさの変更
+    //10%明るく
+    color: lighten($changeColor, 10%);
+    //10%暗く
+    color: darken($changeColor, 10%);
+
+    //透明度の変更 不透明度50%
+    color: rgba($changeColor, 0.5);
+
+    //色の反転
+    color: invert($changeColor);
+
+    //グレースケール
+    color: grayscale($changeColor);
+
+    //反対色に変更
+    color: complement($changeColor);
+
+    //2色間の中間色
+    $colorA: #f00;
+    $colorB: #0f0;
+    color: mix($colorA, $colorB);
+}
+</code></pre>
+
+</section>
+</div>
+
+<div class="topicWrap">
+<section>
+<h2 class="topicTitle">その7 ファイルのインポート</h2>
+<p>
+Sass内でも、外部ファイルの読み込み（@import）をすることが可能です。
+</p>
+
+<div class="sampleCode">
+<h3>Sample Code - import例</h3>
+<pre class="prettyprint linenums">
+<code>@charset "UTF-8";
+
+/*----------------------------------------
+ -import sample06_style1.scssの場合
+----------------------------------------*/
+@import "sample06_style1.scss";
+// ------^外部ファイルの別scssファイルを読み込む
+</code></pre>
+<p class="note">
+上記コードでは、別ファイルのsample06_style.scssファイルを読み込むが、読み込む前のファイルまで
+コンパイルされる。
+</p>
+
+<h4>不要ファイルを出力しない場合</h4>
+<p>
+作業の為に、別ファイルで管理をするが出力する際に元のファイルはコンパイルしない場合、<br>
+ファイル名の冒頭にアンダーバー（ _ ）を記入すると、コンパイル時に、対象のファイルを出力しない設定が可能。
+</p>
+
+<h4>沢山のファイルをimport仕出したら書くのが面倒</h4>
+<p>
+CSSライブラリ（bootstrap,faundation,font-awesome....）や各パーツ毎（btn,layout,font,vars....）など<br>
+機能に分けてファイルを作成していくと、沢山importを各必要があります。<br>
+そういった場合、Node.jsのようにglob機能は搭載されていない為、モジュールとして追加して対応する事が可能です。（gulp-sass-globなど）<br>
+gulpをはじめタスクランナーは煩雑な事を変わりに行う自動化が目的なので、同じ様に煩雑だと感じた時はモジュールを探してみると良いかもしれません。
+
+</p>
+
+<pre class="prettyprint linenums">
+<code>@charset "UTF-8";
+
+/*----------------------------------------
+ -import _sample06_style2.scssの場合
+----------------------------------------*/
+@import "sample06_style2.scss";
+// ------^ファイルがアンダーバー付きであれば、読み込みのみを行い、対象ファイルは出力しない
+// 同名ファイルは混在できないので、アンダーバー付きファイルであっても接頭辞は省略可能です。
+</code></pre>
+</div>
+
+<h3 class="icon icon-iconSet practice">【練習】ファイルインポート</h3>
+<p>
+    別ファイル_sample06_import.scssファイルを作成し、class名practice07内のtitleWrapクラスの文字色を変更する。<br>
+    @importルールを使い、対象ファイルを読み込んで実行してみましょう。<br>
+    ※cssフォルダに_sample06_import.cssが作成されていないことを確認すること。
+</p>
+
+<!-- 練習コード -->
+<div class="practiceWrap practice07">
+    <div class="titleWrap">
+        <h2>サンプルタイトル</h2>
+    </div>
+</div>
+
+</section>
+</div>
+
+<hr>
+
+<div class="topicWrap">
+<section>
+<h2>Sassの基本操作はこれで終了</h2>
+<p>
+    Sassで使用する基本ルールはこれで終了です。<br>
+    ここまでの内容は使用頻度が高いので、積極的に使用していきながら慣れていきましょう。<br>
+    次はSassで使える便利な機能を学習します。
+</p>
+</section>
+</div>
+
+<script src="js/jquery.js"></script>
+<script src="js/func.js"></script>
+<script src="js/prettify.js"></script>
+</body>
+</html>

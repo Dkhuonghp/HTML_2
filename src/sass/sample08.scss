@@ -1,0 +1,31 @@
+@import "sample08_mixin";
+.sample08_1{
+    .boxWrapA{
+        @include boxSet(20px,tomato);
+    }
+    .boxWrapB{
+        @include boxSet(5px,skyblue);
+    }
+}
+
+.sample08_3{
+    .boxWrapA{
+        @include boxSetArg();
+    }
+    .boxWrapB{
+        @include boxSetArg(tomato,yellow);
+    }
+}
+
+.sample08_5{
+    .list{
+        li{
+            @include line(even){
+                color: red;
+            }
+            @include line(odd){
+                color: skyblue;
+            }
+        }
+    }
+}

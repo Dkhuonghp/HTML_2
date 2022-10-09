@@ -1,0 +1,26 @@
+doctype html
+html(lang="ja")
+    head
+        include _temp_p_head
+        title HTML3-04 - Sassでボタンスタイルの作成
+        link(rel="stylesheet", href="css/html03_04.css")
+        link(rel="preconnect", href="https://fonts.googleapis.com")
+        link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+        link(href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet")
+    body
+        header 
+            h1.title ボタンスタイルを設定する
+            p 
+                |Sassの機能を使ってボタンを作成しましょう。
+                br
+                |_html3_04_extend.scssファイルを作成後importし、ボタンの基本スタイルや書式を設定しましょう
+                br
+                |html3_04.scss内では、基本スタイルのボタンにスタイルを上書きし、個別スタイルを設定し各種ボタンを作成しましょう。
+        main 
+            p
+                a(href="").btnBase  標準ボタン
+                a(href="").btnBase.btnSizeL 幅100%ボタン
+                a(href="").btnBase.btnSizeS 小さめのボタン
+                a(href="").btnBase.btnRegist btnRegist
+                a(href="").btnBase.btnSubmit btnRegistから継承されたラウンドボタン
+    include _html03_01_foot

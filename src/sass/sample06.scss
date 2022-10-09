@@ -1,0 +1,19 @@
+@import"ress";
+@import "sample06_var";
+
+
+// 変数の作成
+$main_title_width:300px;
+$main_title_bg:skyblue;
+.practice06{
+    .titleWrap{
+        border: 1px solid tomato;
+        padding: 20px;
+        width:calc(#{$main_title_width} * 3) ;
+        background: $main_title_bg ;
+        &:hover{
+            // background: adjust-hue($main_title_bg, 30deg);
+            background: lighten($main_title_bg, 10%);
+        }
+    }
+}

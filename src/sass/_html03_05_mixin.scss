@@ -1,0 +1,16 @@
+@mixin  firstLine($bg, $color) {
+    background-color: $bg;
+    color: $color;
+}
+
+@mixin lineOdd(){
+    &:nth-of-type(odd){
+        @content;
+    }
+}
+
+@mixin rowEven {
+    &:nth-of-type(even){
+        @content;
+    }
+}

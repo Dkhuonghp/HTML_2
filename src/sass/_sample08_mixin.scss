@@ -1,0 +1,36 @@
+//引数なしのmixin
+
+// @mixin boxSet{
+//     width: 50%;
+//     padding: 10px;
+//     margin: 10px;
+//     background: #bebebe;
+//     color: #FFF;
+// }
+
+
+//引数ありのmixin
+@mixin boxSet($value,$color){
+    width: 50%;
+    padding: $value;
+    margin: $value;
+    background: $color;
+    color: #fff;
+}
+
+//引数を初期直のあるmixin
+@mixin boxSetArg($background:#bebebe,$color:#fff) {
+    width: 50%;
+    padding: 10px;
+    margin: 10px;
+    background: $background;
+    color: $color;
+}
+
+//セレクタの受け渡し @content
+
+@mixin line($value) {
+    &:nth-child(#{$value}){
+        @content;
+    }
+}

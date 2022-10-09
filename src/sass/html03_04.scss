@@ -1,0 +1,83 @@
+@import"vars";
+@import"common";
+@import"ress";
+
+body{
+    background:$html3_04_bgColor ;
+}
+header{
+    padding: 20px;
+    .title{
+        text-align: center;
+        margin: 40px 0;
+        font-size: 2.4rem;
+        color: #333333;
+        font-family: 'Kosugi Maru', sans-serif;
+    }
+
+    p{
+        font-size: 1.8rem;
+        line-height: 1.8;
+    }
+}
+main{
+    padding: 20px;
+
+    p{
+        a{
+            &:link,&:visited{
+                text-decoration: none;
+                color:#333;
+            }
+        }
+    }
+
+    .btnBase, .btnSizeL, .btnSizeS, .btnSubmit{
+        font-size: 1.4rem;
+        display: block;
+        width: 230px;
+        margin: 10px 0;
+        padding: 5px;
+        text-align: center;
+        border: 1px solid $html3_04_btnBorder;
+        background:$html3_04_btnBg;
+        &:hover{
+            background: lighten($html3_04_btnBorder,30%);
+        }
+    }
+
+    .btnRegist:link, .btnSubmit:link, .btnRegist:visited, .btnSubmit:visited {
+        color: #fff;
+    }
+    .btnSizeL{
+        width: 100%;
+    }
+    .btnSizeS{
+        font-size: 1em;
+        width: 150px;
+    }
+    .btnSubmit{
+        padding: 10px;
+        border-radius: 3px;
+        font-size: 1em;
+        box-shadow: 0 -2px 0 #333 inset;
+        transition: .2s ease;
+    }
+    .btnRegist, .btnSubmit{
+        border: 1px solid #cccccc;
+        background: $html3_04_btnRegistBg;
+    }
+    .btnRegist:hover{
+        background: $html3_04_btnRegistBg;
+        &:hover{
+            background:darken($html3_04_btnRegistBg,5%) ;
+        }
+    }
+    .btnSubmit:hover{
+        background: #0064b8;
+        box-shadow: none;
+    }
+}
+footer{
+    text-align: center;
+}

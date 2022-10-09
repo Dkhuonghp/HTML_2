@@ -1,0 +1,25 @@
+doctype html
+html(lang="ja")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title sample03
+    body 
+
+        h1 pugファイルを読み込む - include
+        h2 pugファイルの読み込み1
+        section 
+            p
+                |ugファイルを複数に分解し、それぞれ別のファイルを読み込む事が可能です。
+                |sample03_a.pugファイルを作成し、下記wrapAクラス内にincludeしてみましょう。
+        section 
+            include sample03_a
+        //- 同じ手順で_sample03_b.pugを読み込んで見ましょう
+        //- _sample03_b.pugファイルを作成し、下記wrapBクラス内にincludeしてみましょう。
+        section 
+            include _sample03_b
+ 
+
+
+

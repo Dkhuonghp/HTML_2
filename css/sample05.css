@@ -1,0 +1,33 @@
+@charset "UTF-8";
+.practice01 {
+  background: red;
+}
+
+.practice01 p {
+  color: skyblue;
+  font-weight: bold;
+}
+
+.practice02 a:link, .practice02 a:visited {
+  color: tomato;
+}
+
+.practice02 a:hover {
+  color: skyblue;
+}
+
+.practice03 h3 {
+  padding-left: 5px;
+  border-left: 5px solid #333;
+  border-bottom: 1px solid #333;
+}
+
+.practice04 {
+  /*practice04のコメント*/
+  color: tomato;
+}
+
+.practice05 {
+  color: red;
+  background: url("BG_PATH.jpg");
+}

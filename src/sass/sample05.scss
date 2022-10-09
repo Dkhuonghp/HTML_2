@@ -1,0 +1,42 @@
+// body{
+//     background: tomato;
+// }
+.practice01{
+    background: red;
+    p{
+        color: skyblue;
+        font-weight: bold;
+    }
+}
+
+.practice02{
+    a{
+        &:link,&:visited{
+            color: tomato;
+        }
+        &:hover{
+            color: skyblue;
+        }
+    }
+
+}
+.practice03{
+    h3{
+        padding-left: 5px;
+        border: {
+            left: 5px solid #333;
+            bottom: 1px solid #333;
+        }
+    }
+}
+.practice04{
+    /*practice04のコメント*/
+    color: tomato;
+}
+
+$fontcolor:red;
+$BG_PATH:'../img/';
+.practice05{
+    color: $fontcolor;
+    background: url("#{BG_PATH}.jpg");
+}

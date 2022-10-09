@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/earlyaccess/mplus1p.css" rel="stylesheet">
+  <link href="css/ress.css" rel="stylesheet">
+  <link href="css/sample05_style.css" rel="stylesheet">
+  <link href="css/sample08.css" rel="stylesheet">
+  <link href="js/prettify.css" rel="stylesheet">
+  <title>Sassの基礎　練習ファイル08 - mixin</title>
+</head>
+<body>
+<header>
+<h1 class="wf-mplus1p icon icon-iconSet contentTitle">
+Sassファイルの練習ファイル08</h1>
+</header>
+
+<div class="topicWrap">
+<section>
+<h2 class="wf-mplus1p topicTitle">その9 @mixin スタイルの使い回し</h2>
+<p>
+スタイルの集まりを作成し、他の場所へ呼び出して作成する事が出来ます。<br>
+呼び出すという点においては@extendと同じに感じますが、引数を指定し、ミックスインの値を一部変更して使うなど<br>
+@extendに比べ柔軟性の高い機能になっています。<br>
+まずは、_sample08_mixin.scssを作成し、ミックスインの定義を行います。
+</p>
+
+<div class="sampleCode">
+<h3>Sample Code - ミックスインの定義</h3>
+<pre class="prettyprint linenums">
+<code>@mixin boxSet{
+    width: 50%;
+    padding: 10px;
+    margin: 10px;
+    background: #bebebe;
+    color: #FFF;
+}
+</code></pre>
+</div>
+<p class="note">
+    ミックスインは、継承（@extend）と同じく、@mixinの後に半角スペースを空けて任意の名前を付けます。
+</p>
+
+<h3>1.ミックスインの呼び出し</h3>
+<p>
+定義したミックスインを使用する場合、@includeを使って呼び出します。<br>
+先程定義したミックスインをboxWrapクラスにセットしてみましょう。
+</p>
+
+<div class="sampleCode">
+<h3>Sample Code - ミックスインの呼び出し</h3>
+<pre class="prettyprint linenums">
+<code>//ミックスインの呼び出し
+.boxWrapA{
+    @include boxSet;
+}
+</code></pre>
+</div>
+<!--
+//////////////////////////////////////////////////////////////////////////// 
+練習コード
+sample08_mixinにミックスインを定義し、
+sample08_1クラス内にミックスインを読み込んでみましょう
+////////////////////////////////////////////////////////////////////////////
+-->
+<h3>実行結果画面</h3>
+<div class="practiceWrap sample08_1">
+
+<div class="boxWrapA">
+    boxWrapA Area
+</div>
+
+<div class="boxWrapB">
+    boxWrapB Area
+</div>
+
+</div>
+<p>
+ミックスインは、上記の様に@includeとセットで使用します。<br>
+今の状態では、@extendとの違いが分からないのでもう少し深く掘り下げていきます。
+</p>
+
+<h3>2.ルールが増えた場合</h3>
+<p>
+まずは以下のコードの様に、2箇所の部分で同じミックスインを読み込んでみます。
+</p>
+
+<div class="sampleCode">
+<h3>Sample Code - ミックスインの呼び出し</h3>
+<pre class="prettyprint linenums">
+<code>//ミックスインの呼び出し
+.boxWrapA{
+    @include boxSet;
+}
+.boxWrapB{
+    @include boxSet;
+}
+</code></pre>
+</div>
+<p>
+ルールセットが2つに増えました。@extendでも同様に各ソースコードを確認すると、<br>
+@extendの場合は、グループ化され、@mixinの場合は各々にコンパイルされている事がわかります。<br>
+同じルールを適用する場合は、@extendの方が適している場合が多いという点を覚えておきましょう。
+</p>
+
+<h3>3.ミックスインに引数を設定する</h3>
+<p>
+ミックスインの真価はここからです。ミックスインには引数というものを設定する事が可能です。<br>
+引数とは、ミックスインで定義した一部を変更する事が可能になります。<br>
+先程のミックスインを少し変更してみましょう。
+</p>
+
+<div class="sampleCode">
+<h3>Sample Code - ミックスインの定義</h3>
+<pre class="prettyprint linenums">
+<code>//ミックスインの定義　引数セット
+@mixin boxSetArg($value){
+    padding: $value;
+    margin: $value;
+    background: #bebebe;
+    color: #FFF;
+}
+//ミックスインの呼び出し
+.boxWrapA{
+    @include boxSet(10px);
+}
+.boxWrapB{
+    @include boxSet(5px);
+}
+</code></pre>
+<p class="note">
+ミックスインの名前の後に、括弧を付け変数をセットする事で、@includeでの呼び出し時に値をセットすることが可能になります。
+</p>
+</div>
+
+<!--
+//////////////////////////////////////////////////////////////////////////// 
+練習コード
+boxSetArg というミックスインを作成し、引数設定をしてみましょう
+sample08_2クラス内にミックスインを読み込んでみましょう
+////////////////////////////////////////////////////////////////////////////
+-->
+<h3>実行結果画面</h3>
+<div class="practiceWrap sample08_2">
+
+<div class="boxWrapA">
+    boxWrapA Area
+</div>
+<div class="boxWrapB">
+    boxWrapB Area
+</div>
+</div>
+
+
+<p>
+コンパイルしてCSSソースを確認すると、引数を設定した部分だけ値が変更された事が分かります。<br>
+@extendは同じスタイルを継承して作りますが、@mixinは値の一部を変更し、使いまわすことが可能です。<br>
+では、他にミックスインの使い方を見ていきましょう。
+</p>
+
+<h3>4.引数に初期値を設定する</h3>
+<p>
+引数をセットし、毎度入力するのも面倒です。<br>
+そこで、頻繁に使う値などは初期値を設定し、変更したい時だけ変更する様に変更します。
+</p>
+
+<div class="sampleCode">
+<h3>Sample Code - ミックスインの定義</h3>
+<pre class="prettyprint linenums">
+<code>//ミックスインの定義　引数セット
+@mixin boxSetArg($value:10px){
+    padding: $value;
+    margin: $value;
+    background: #bebebe;
+    color: #FFF;
+}
+//ミックスインの呼び出し
+.boxWrapA{
+    @include boxSet;
+}
+.boxWrapB{
+    @include boxSet(20px);
+}
+</code></pre>
+<p class="note">
+初期値を使いたい場合は、括弧を省略する事が可能です。<br>
+省略しない場合は、boxSex()の様に括弧のみを記述します。
+</p>
+</div>
+
+<!--
+//////////////////////////////////////////////////////////////////////////// 
+練習コード
+boxSetArgで設定したミックスインを編集し、初期値の設定をしてみましょう
+sample08_3クラス内にミックスインを読み込んでみましょう
+////////////////////////////////////////////////////////////////////////////
+-->
+<h3>実行結果画面</h3>
+<div class="practiceWrap sample08_3">
+
+<div class="boxWrapA">
+    boxWrapA Area
+</div>
+<div class="boxWrapB">
+    boxWrapB Area
+</div>
+</div>
+
+<h3>5.引数の複数指定</h3>
+<p>
+初期値は複数セットすることが出来ます。初期値をカンマ区切りにすることで、初期値を複数指定する事が可能になります。
+</p>
+
+<div class="sampleCode">
+<h3>Sample Code - ミックスインの定義</h3>
+<pre class="prettyprint linenums">
+<code>//ミックスインの初期値複数設定
+@mixin boxSet($margin:10px,$padding:20px){
+    margin: $margin;
+    padding: $padding;
+    background: #bebebe;
+    color: #FFF;
+}
+//ミックスインの呼び出し
+.boxWrap{
+    @include boxSet;
+}
+.boxInnerWrap{
+    @include boxSet(20px 10px,0);
+}
+</code></pre>
+</div>
+<p>boxWrapクラスには初期値が、boxInnerWrapクラスにはそれぞれの値が適用されます。</p>
+
+
+<!--
+//////////////////////////////////////////////////////////////////////////// 
+練習コード
+boxSetArgで設定したミックスインを編集し、初期値の設定をしてみましょう
+sample08_4クラス内にミックスインを読み込んでみましょう
+////////////////////////////////////////////////////////////////////////////
+-->
+<h3>実行結果画面</h3>
+<div class="practiceWrap sample08_4">
+
+<div class="boxWrapA">
+    boxWrapA Area
+</div>
+<div class="boxWrapB">
+    boxWrapB Area
+</div>
+</div>
+<p class="note">
+1つ目の引数のみ変更したい場合は、2つ目の引数を記述しないで書けば問題ありませんが、<br>
+2つ目の引数のみを変更したい場合は、引数を入れ替えるか、1つ目の引数に初期値を入力しなければいけないので注意が必要です。
+</p>
+
+<h3>6.ミックスインにコンテンツブロックを渡す@content</h3>
+<p>
+これまで、@includeを使い、ミックスインを呼び出していましたが、<br>
+@contentは、ルールやスタイルなどのコンテンツブロックを渡す機能があります。<br>
+以下のサンプルコードを見てみましょう。
+</p>
+
+<div class="sampleCode">
+<h3>Sample Code - @content</h3>
+<pre class="prettyprint linenums">
+<code>//IE6向けのコンテントブロックの受け渡し
+@mixin apply-to-ie6-only {
+  * html {
+    @content;
+  }
+}
+@include apply-to-ie6-only {
+  #logo {
+    background-image: url(/logo.gif);
+  }
+}
+</code></pre>
+</div>
+<p>
+@includeとは反対に、@contentは指定した場所にルールセットなどを渡すことが可能です<br>
+例えば、IE６向けのハックを何度も各は面倒な場合、ハックのセットをミックスインで記述しておき、<br>
+@includeを使って呼び出し、括弧内にIE6のセレクタを付ける。という事が可能です。
+</p>
+
+<!--
+//////////////////////////////////////////////////////////////////////////// 
+練習コード
+listBaseミックスインを設定し、背景色や文字色のスタイルを作成します。
+listEvenとlistOddミックスインを作成し、
+偶数・奇数に分けれるセレクタを設定してみましょう。
+@contentでコンテンツブロックを受け渡します。
+sample08_5クラス内にミックスインを読み込んでみましょう
+////////////////////////////////////////////////////////////////////////////
+-->
+<h3>実行結果画面</h3>
+<div class="practiceWrap sample08_5">
+
+<ul class="list">
+    <li>list1</li>
+    <li>list2</li>
+    <li>list3</li>
+    <li>list4</li>
+</ul>
+
+</div>
+
+
+<h2 class="wf-mplus1p topicTitle">あとがき</h2>
+<p>
+他にもSass内で用意された制御構文・関数・自作関数など便利な機能が多数用意されています。<br>
+もっと深く掘り下げていきたい人は、Sassの公式ドキュメントを参考にしましょう。<br>
+<a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html">Sass公式ドキュメント</a><br>
+英語が苦手な人はまずは、日本語のまとめを参考に<br>
+<a href="http://qiita.com/tomoyuki_okawa/items/b7c0d970f45435eab7c3">Sass構文まとめ</a>
+</p>
+</section>
+</div>
+<script src="js/jquery.js"></script>
+<script src="js/func.js"></script>
+<script src="js/prettify.js"></script>
+</body>
+</html>

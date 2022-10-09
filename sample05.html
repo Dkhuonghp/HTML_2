@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="css/ress.css" rel="stylesheet">
+  <link href="css/sample05_style.css" rel="stylesheet">
+  <link href="css/sample05.css" rel="stylesheet">
+  <link href="js/prettify.css" rel="stylesheet">
+  <title>Sassの基礎　練習ファイル01</title>
+</head>
+<body>
+<header>
+    <h1 class="icon icon-iconSet contentTitle">
+    Sassファイルの練習ファイル01</h1>
+    </header>
+    
+    <div class="topicWrap">
+    <section>
+    <h2 class="topicTitle">その1 セレクタのネスト</h2>
+    <p>Sassの中でもよく使う機能で、CSSをHTML構造に合わせて入れ子で書いていくことが出来ます。</p>
+    
+    <h3 class="icon icon-iconSet practice">【練習】セレクタのネストの練習</h3>
+    <p>以下の内容をネストを使ってスタイルを変更してみましょう。</p>
+    
+    <!-- 練習コード -->
+    <div class="practiceWrap practice01">
+        <h1>サンプル見出し</h1>
+        <p>サンプル段落</p>
+        <ul>
+            <li>サンプル箇条書き</li>
+            <li>サンプル箇条書き</li>
+            <li>サンプル箇条書き</li>
+            <li>サンプル箇条書き</li>
+        </ul>
+    </div>
+    <div class="sampleCode">
+    <h3>Sample Code - ネスト例</h3>
+    <pre class="prettyprint linenums">
+    <code>.practiceWrap{
+        color: #663300;
+        h1,p{
+            font-size: 1em;
+        }
+        ul{
+            list-style: none;
+            + ul{
+                color: #993300;
+            }
+        }
+    }
+    </code></pre>
+    <p class="note">
+    サンプルコードの通り、子要素(S > A)や隣接セレクタ（S + S）を使用することも可能<br>
+    ただし、ネストが深すぎると可読性が落ちるので注意。
+    </p>
+    </div>
+    </section>
+    </div>
+    
+    <div class="topicWrap">
+    <section>
+    <h2 class="topicTitle">その2 親セレクタの参照</h2>
+    <p>
+    参照しているセレクタから親を指定したい場合、アンパサンド（&amp;）を使用すると参照することが出来ます。<br>
+    一番上の親からネストをしていくと、スタイルのネストが増え、可読性が落ちてしまうのをふせぎます。
+    </p>
+    
+    <div class="sampleCode">
+    <h3>Sample Code - 親参照を使わなかった場合</h3>
+    <pre class="prettyprint linenums">
+    <code>#top{
+        width: 100%;
+        ul,ol{
+            list-style: none;
+        }
+    }
+    body.subPage #slide{
+        margin: 0 20px;
+    }
+    </code></pre>
+    <p class="note">
+    こういった場合、#slide内のネストやルールが増えると、下に落ちて可読性が下がる。
+    </p>
+    </div>
+    
+    <div class="sampleCode">
+    <h3>Sample Code - 親参照を使った場合</h3>
+    <pre class="prettyprint linenums">
+    <code>#top{
+        width: 100%;
+        body.subPage &{
+            margin: 0 20px;
+        }
+        ul,ol{
+            list-style: none;
+        }
+    }
+    </code></pre>
+    <p class="note">
+    &amp;を使って親を参照することが可能。
+    </p>
+    </div>
+    
+    <h3 class="icon icon-iconSet practice">【練習】親参照を使ったセレクタの指定</h3>
+    <p>以下の内容を親セレクタを使って参照し、擬似クラスを使ってスタイルを設定してみましょう。</p>
+    
+    <!-- 練習コード -->
+    <div class="practiceWrap practice02">
+    <nav class="pageNavi">
+    <ul>
+        <li><a href="#">ナビゲーションリンク</a></li>
+        <li><a href="#">ナビゲーションリンク</a></li>
+        <li><a href="#">ナビゲーションリンク</a></li>
+        <li><a href="#">ナビゲーションリンク</a></li>
+    </ul>
+    </nav>
+    </div>
+    
+    </section>
+    </div>
+    
+    <div class="topicWrap">
+    <section>
+    <h2 class="topicTitle">その３ プロパティのネスト</h2>
+    <p>
+    Sassのネストはセレクタだけでなく、プロパティにもセットすることが可能です。<br>
+    プロパティのネストとはショートハンド（省略記述）で書けるプロパティで使うことができます。
+    </p>
+    
+    <div class="sampleCode">
+    <h3>Sample Code - 通常記述するCSS</h3>
+    <pre class="prettyprint linenums">
+    <code>.sample{
+        border-bottom: 1px solid #333;
+        border-left: 5px solid #333;
+    }
+    </code></pre>
+    </div>
+    
+    <p>
+    プロパティをネストすると以下の記述となります。
+    </p>
+    
+    <div class="sampleCode">
+    <h3>Sample Code - ネストされたプロパティ</h3>
+    <pre class="prettyprint linenums">
+    <code>.sample{
+        border:{
+            bottom: 1px solid #333;
+            left:{
+                width: 5px;
+                style: solid;
+                color: #333;
+            }
+        }
+    }
+    
+    //他にも
+    .box{
+        margin: 0{
+            left: 20px;
+        }
+        border: 1px solid #999{
+            bottom: 0;
+        }
+    }
+    </code></pre>
+    <p class="note">
+    コロン（：）の後に中括弧記述でネストすることで、border-bottomに対して一括指定や
+    leftをさらにネストし、固有のスタイルを指定することが可能です。<br>
+    また、値を続けて記述することで上書きすることも可能です。<br>
+    CSSのプロパティにハイフン（ - ）があるものはすべてネストすることが可能です。
+    </p>
+    </div>
+    
+    <h3 class="icon icon-iconSet practice">【練習】プロパティのネスト</h3>
+    <p>以下見出し（h3）に対して、プロパティのネストを使い、スタイルを設定してみましょう。</p>
+    
+    <!-- 練習コード -->
+    <div class="practiceWrap practice03">
+    <h3>topicTitle</h3>
+    <p>topicTitleのサンプル段落</p>
+    
+    <h3>topicTitle</h3>
+    <p>topicTitleのサンプル段落</p>
+    </div>
+    
+    </section>
+    </div>
+    
+    <div class="topicWrap">
+    <section>
+    <h2 class="topicTitle">その４ Sassのコメント</h2>
+    <p>
+    従来のCSSと同じくSass上でもコメントを扱えます。<br>
+    コンパイルした際にコメントを残したい場合は、/* 〜 */を使用し、コンパイル時に
+    コメントを残さない場合は、一行コメント // （ダブルスラッシュ）を使用します。
+    </p>
+    
+    <div class="sampleCode">
+    <h3>Sample Code - Sassのコメント</h3>
+    <pre class="prettyprint linenums">
+    <code>.sample{
+        border-bottom: 1px solid #333;
+        /* 通常のコメントはコンパイル時に出力される */
+        /*border-left: 5px solid #333;*/
+    
+        /* 以下のコメントはコンパイル時に出力されない */
+        //color: #669900;
+    }
+    </code>
+    </pre>
+    <p class="note">
+    gulp.jsファイル内でoutputStyleを「compressed」にしていた場合はすべてのコメントが破棄されます。<br>
+    あわせて確認してみましょう。
+    </p>
+    </div>
+    
+    
+    <h3 class="icon icon-iconSet practice">【練習】コメントの作成</h3>
+    <p>以下のソースコード上にコメントを入力して、コンパイルされる・されないを確認してみましょう。</p>
+    
+    <!-- 練習コード -->
+    <div class="practiceWrap practice04">
+    <h3>Sassのコメント</h3>
+    <p>Sassのコメントにはコンパイル時に出力するしないをコメントによって切り分けることが可能。</p>
+    </div>
+    </section>
+    </div>
+    
+    <div class="topicWrap">
+    <section>
+    <h2 class="topicTitle">その5 変数</h2>
+    <p>
+    Sassでは、javaScriptと同じく変数を扱うことが可能です。ドルマークを使用し、変数名を定義します。<br>
+    使用する際もドルマーク付きで記述することで、値を参照することが可能です。
+    </p>
+    
+    <div class="sampleCode">
+    <h3>Sample Code - 変数</h3>
+    <pre class="prettyprint linenums">
+    <code>$mainColor: #990033;
+    h1{
+        background-color: $mainColor;
+    }
+    .topicTitle{
+        cololr: $mainColor;
+    }
+    </code>
+    </pre>
+    <p class="note">
+    テーマカラーなどよく使用するカラーコードなど汎用的な値は変数にすることで、値の変更時など
+    一括で指定することが出来ます。<br>
+    また、@importルールで読み込むファイルに変数を記述し、読み込むことも可能です。
+    </p>
+    </div>
+    
+    
+    <h3 class="icon icon-iconSet practice">【練習】変数の練習</h3>
+    <p>以下の内容にsubColor変数を作成し、practice05クラス内にあるそれぞれのセレクタの文字色を変更してみましょう。</p>
+    
+    <!-- 練習コード -->
+    <div class="practiceWrap practice05">
+    <h1 class="topicTitle">Sassの変数</h1>
+    <p>Sassには変数を扱うことができ、汎用的な値を格納・参照することが可能です。<br>
+    変数を作成する際は、 $変数名 : 値 ; で作成し、変数名を記述することが使用が可能です。
+    </p>
+    </div>
+    
+    <h4>変数のスコープ（参照可能な範囲）</h4>
+    <p>
+    変数はソースコード、上から処理される為、必ず使用したい場所より上で記述する必要があります。<br>
+    一度作成した変数は、以降どこからでも参照可能ですが、ネスト内などで変数を作成した場合、ネスト外からの参照は出来ないので注意が必要です。
+    </p>
+    
+    <div class="sampleCode">
+    <h3>Sample Code - 変数のスコープ</h3>
+    <pre class="prettyprint linenums">
+    <code>.contentWrap{
+        $value: 20px;
+        margin: $value;
+        padding: $value;
+        p{
+            padding: $value;
+        }
+    }
+    .box{
+        //これはネスト外なので、参照することが出来ない。
+        <del>margin: $value;</del>
+    }
+    </code>
+    </pre>
+    <p class="note">
+    上記サンプルコードの様に、ネスト内で変数を作成すれば、汎用的な変数名を作成することが可能なので、<br>
+    バッティングを回避することが出来ます。<br>
+    もし、どちらも参照出来る変数名があった場合は、一番近い（後から記述）変数が上書きされ、参照されます。
+    </p>
+    </div>
+    
+    <h4>変数で使用出来ない記号</h4>
+    <p>
+    変数は英数字、_（アンダースコア）-（ハイフン）を使用することが可能です。<br>
+    また、マルチバイト文字に対応しているので、日本語も可能です。<br>
+    半角から始まる数字、連続したハイフンから始まる名前はエラーになります。
+    </p>
+    
+    <div class="sampleCode">
+    <h3>Sample Code - 作成可能な変数</h3>
+    <pre class="prettyprint linenums">
+    <code>$width10: 10px;
+    $w-10: 10px;
+    $w_10: 10px;
+    $幅１０: 10px;
+    $__w10: 10px;
+    $-__-w: 10px;
+    $良い感じの余白サイズ: 10px;
+    </code>
+    </pre>
+    </div>
+    
+    <h4>変数の補完</h4>
+    <p>
+    変数を使って一部値を参照する場合に、セレクタを参照や、画像等のファイルパスを指定する場合には、
+    そのまま記述すると、エラーになります。<br>
+    ファイル名と変数名の区別がつかなくなるため、補完することで解決が可能です。
+    </p>
+    
+    <div class="sampleCode">
+    <h3>Sample Code - 作成可能な変数</h3>
+    <pre class="prettyprint linenums">
+    <code>$selector: '.wrap,.innerWrap';
+    $IMG_PATH: '../img/bg_main.jpg';
+    #{$selector}{
+        background: url(#{$IMG_PATH})
+    }
+    </code>
+    </pre>
+    <p class="note">ファイルパスやセレクタ名などは文字列として扱う為、""か''で囲う必要があります。</p>
+    </div>
+    
+    
+    </section>
+    </div>
+        
+
+
+
+
+<script src="js/jquery.js"></script>
+<script src="js/func.js"></script>
+<script src="js/prettify.js"></script>
+</body>
+</html>

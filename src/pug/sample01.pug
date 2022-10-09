@@ -1,0 +1,30 @@
+doctype html
+html(lang="ja")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title sample01 - pugfile 
+    body 
+        h1 pugファイルの作成
+
+        p  pugファイルでのhtmlは、親子関係を作りながら要素を指定していきます。
+        section 
+            h2 文字の記述について1
+            p 要素の後にスペースを明けて文字を入力する事が可能です。
+        section 
+            h2 文字の記述について2
+            p 
+                |複数行にまたぐ文字の場合 パイプ（｜）を子に置き、
+                br
+                |引き続き文字を書く事が可能です。
+        section 
+            h3 文字の記述について3
+            p.
+                ドット（ . ）を要素の後ろに記述することで テキストを複数行記入することも可能です。
+        section 
+            h2 文字の記述について4
+            p 
+                |複数行にまたぐ文字の場合
+                br
+                |改行したい場合は、子に対してbr要素を間にはさみます。

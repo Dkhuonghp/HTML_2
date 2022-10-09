@@ -1,0 +1,66 @@
+@import"vars";
+@import"common";
+@import"ress";
+
+
+
+header{
+    background: #333;
+    padding: 2rem;
+    color: #fff;
+    text-align: center;
+}
+
+main{
+    text-align: center;
+    color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    section{
+        border: solid 1px #fff;
+        flex-grow: 2;
+        margin: 1rem;
+        h2{
+            margin: 2rem;
+            font-size: 2rem;
+        }
+        p{
+            margin: 2rem;
+            font-size: 1.4rem;
+        }
+    }
+}
+footer{
+    height: 40px;
+    line-height: 2;
+    color: #fff;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+@media screen and (max-width:480px){
+    body{
+        background: $html3_06_bgColor;
+    }
+}
+@media screen and (min-width:480px) and (max-width: 600px){
+    body{
+        background: skyblue;
+    }
+}
+@media screen and (min-width:600px) and (max-width: 960px){
+    body{
+        background: purple;
+    }
+}
+@media screen and (min-width:960px) and (max-width: 1280px){
+    body{
+        background: #03ff75;
+    }
+}
+@media screen and (min-width: 1280px) {
+    body{
+        background-color: rgb(247, 83, 239);
+    }
+}

@@ -1,0 +1,39 @@
+.sample08_1 .boxWrapA {
+  width: 50%;
+  padding: 20px;
+  margin: 20px;
+  background: tomato;
+  color: #fff;
+}
+
+.sample08_1 .boxWrapB {
+  width: 50%;
+  padding: 5px;
+  margin: 5px;
+  background: skyblue;
+  color: #fff;
+}
+
+.sample08_3 .boxWrapA {
+  width: 50%;
+  padding: 10px;
+  margin: 10px;
+  background: #bebebe;
+  color: #fff;
+}
+
+.sample08_3 .boxWrapB {
+  width: 50%;
+  padding: 10px;
+  margin: 10px;
+  background: tomato;
+  color: yellow;
+}
+
+.sample08_5 .list li:nth-child(even) {
+  color: red;
+}
+
+.sample08_5 .list li:nth-child(odd) {
+  color: skyblue;
+}

@@ -1,0 +1,61 @@
+@import"vars";
+@import"common";
+@import"ress";
+@import"html03_05_mixin";
+
+body{
+    background: $html3_04_bgColor;
+}
+
+header{
+    margin: 40px 0;
+    .title{
+        font-size: 3rem;
+        font-family:'Kosugi Maru', sans-serif;
+        text-align: center;
+        margin: 1rem 0;
+    }
+    p{
+        text-align: center;
+    }
+}
+
+.specWrap{
+    border: 1px #333 solid;
+    width: 800px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    th, td{
+        text-align: center;
+        padding: 1em;
+        font-size: 1.6rem;
+        color: #333;
+    }
+    .specTitle{
+        @include firstLine($html3_05_planColor, #fff)
+    }
+    tr{
+        &:first-child{
+            th{
+                @include firstLine($html3_05_specHeadBg, #fff);
+                border:none;
+            }
+        }
+        @include lineOdd{
+            background: $html3_05_specLineOddBg;
+            color: #333;
+        }
+    }
+    td{
+
+        @include rowEven{
+            border-left: 1px dotted #333;
+        }
+    }
+}
+footer{
+    p{
+        text-align: center;
+        font-size: 1.6rem;
+    }
+}
